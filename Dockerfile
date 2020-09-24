@@ -3,11 +3,8 @@ FROM alpine:3.10
 # Install OpenSSH server and Gitolite
 # Unlock the automatically-created git user
 RUN set -x \
- && apk add --no-cache gitolite openssh python3 \
+ && apk add --no-cache gitolite openssh python2 \
  && passwd -u git
-
-# Enable repo-specific hooks
-RUN sed -i -e '/repo-specific-hooks/s/#/ /g' /usr/lib/gitolite/lib/Gitolite/Rc.pm
 
 # Volume used to store SSH host keys, generated on first run
 VOLUME /etc/ssh/keys
