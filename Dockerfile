@@ -6,6 +6,9 @@ RUN set -x \
  && apk add --no-cache gitolite openssh python3 \
  && passwd -u git
 
+# Enable repo-specific hooks
+RUN sed -i -e '/repo-specific-hooks/s/#/ /g' /usr/lib/gitolite/lib/Gitolite/Rc.pm
+
 # Volume used to store SSH host keys, generated on first run
 VOLUME /etc/ssh/keys
 
